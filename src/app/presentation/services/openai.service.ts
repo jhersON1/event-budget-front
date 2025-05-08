@@ -12,9 +12,14 @@ export interface Message {
 @Injectable({ providedIn: 'root' })
 export class OpenAiService {
   private apiUrl =
-    'https://construction-budget-back.onrender.com/assistant/text-to-json';
+    'https://construction-budget-back.onrender.com/event/text-to-json-event';
   private reportsUrl =
-    'https://construction-budget-back.onrender.com/reports/bill'; // URL para generar PDF
+    'https://construction-budget-back.onrender.com/reports/bill-event';
+
+  // private apiEventUrl =
+  //   'http://localhost:3000/event/text-to-json-event';
+  // private reportsEventUrl =
+  //   'http://localhost:3000/reports/bill-event';
   private http = inject(HttpClient);
 
   createThread(): Observable<string> {
@@ -37,10 +42,10 @@ export class OpenAiService {
     return this.http.post<any>(this.apiUrl, { messages });
   }
 
-  // Nueva función para generar y descargar PDF
   generatePdf(data: any): Observable<Blob> {
     return this.http.post(this.reportsUrl, data, {
-      responseType: 'blob', // Importante para recibir datos binarios
+      responseType: 'blob', 
     });
   }
+
 }
