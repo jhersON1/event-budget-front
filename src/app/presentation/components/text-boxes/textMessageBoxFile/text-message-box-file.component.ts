@@ -51,11 +51,16 @@ export class TextMessageBoxFileComponent {
     const { prompt, file } = this.form.value;
     this.onMessage.emit({ prompt, file: file! });
 
-
     this.form.reset();
     this.previewUrl = null;
 
     this.fileInput.nativeElement.value = '';
+  }
+
+  getFileName(): string {
+    const file = this.form.get('file')?.value as unknown as File;
+    if (!file) return '';
+    return file.name;
   }
 
   private atLeastOneFieldValidator(group: AbstractControl): ValidationErrors | null {

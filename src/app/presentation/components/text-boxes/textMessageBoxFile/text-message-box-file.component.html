@@ -1,17 +1,23 @@
 @if (previewUrl) {
-<div class="flex items-center mb-2">
-  <img [src]="previewUrl" alt="Vista previa" class="h-12 w-12 rounded shadow mr-2 object-cover" />
-  <button type="button" (click)="removeFile()" class="text-gray-500 hover:text-red-600" aria-label="Quitar imagen">
-    <i class="fa-solid fa-xmark"></i>
-  </button>
+<div class="flex items-center mb-3 p-2 bg-slate-700/50 rounded-lg animate-fadeIn">
+  <div class="relative group">
+    <img [src]="previewUrl" alt="Vista previa" class="h-16 w-16 rounded-lg shadow-md object-cover transition-all duration-300 hover:scale-105" />
+    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-lg">
+      <button type="button" (click)="removeFile()" class="text-white bg-red-500/80 rounded-full p-1 hover:bg-red-600 transition-colors" aria-label="Quitar imagen">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+  <span class="ml-2 text-sm text-slate-300 truncate max-w-[200px]">{{ getFileName() }}</span>
 </div>
 }
 
 <form [formGroup]="form" (ngSubmit)="handleSubmit()"
-  class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+  class="flex flex-row items-center h-16 rounded-xl bg-slate-700/50 w-full px-4 border border-slate-600/50 shadow-lg focus-within:border-blue-500/50 focus-within:ring-1 focus-within:ring-blue-500/30 transition-all duration-300">
+  
   <div class="mr-3">
     <button (click)="fileInput.value = ''; fileInput.click()" type="button"
-      class="flex items-center justify-center text-gray-400" aria-label="Adjuntar archivo">
+      class="flex items-center justify-center text-slate-400 hover:text-blue-400 p-2 transition-colors duration-300" aria-label="Adjuntar archivo">
       <i class="fa-solid fa-paperclip text-xl"></i>
     </button>
     <input type="file" #fileInput hidden (change)="handleSelectedFile($event)" accept="image/*" />
@@ -20,14 +26,16 @@
   <div class="flex-grow">
     <div class="relative w-full">
       <input type="text" autofocus
-        class="flex w-full border rounded-xl text-gray-800 focus:outline-none focus:border-indigo-300 pl-4 h-10"
+        class="flex w-full bg-transparent border-none text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-0 py-3 px-2 text-base transition-all duration-300"
         [placeholder]="placeholder" formControlName="prompt" />
     </div>
   </div>
 
-  <div class="ml-4">
-    <button class="btn-primary" type="submit" [disabled]="form.invalid">
-      <span class="mr-2">Enviar</span>
+  <div class="ml-3">
+    <button 
+      class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2.5 flex items-center justify-center focus:ring-2 focus:ring-blue-500/50 focus:outline-none transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" 
+      type="submit" 
+      [disabled]="form.invalid">
       <i class="fa-regular fa-paper-plane"></i>
     </button>
   </div>

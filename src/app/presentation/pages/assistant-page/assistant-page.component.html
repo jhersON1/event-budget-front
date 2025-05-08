@@ -1,10 +1,23 @@
-<div class="chat-container">
-  <div class="chat-messages">
+<div class="chat-container flex flex-col h-full bg-gradient-to-b from-slate-900 to-slate-800">
+  <!-- Header -->
+  <header class="p-4 border-b border-slate-700 bg-slate-800/70 backdrop-blur-sm">
+    <div class="flex items-center space-x-3">
+      <div class="bg-blue-500 rounded-full p-2 shadow-md shadow-blue-500/20">
+        <i class="fa-solid fa-robot text-white text-xl"></i>
+      </div>
+      <div>
+        <h1 class="text-xl font-semibold text-white">Asistente de Presupuestos</h1>
+        <p class="text-sm text-slate-300">Tu planificador inteligente de eventos</p>
+      </div>
+    </div>
+  </header>
 
-    <div class="grid gap-y-2">
-      <!--      chat messages-->
+  <!-- Chat Messages -->
+  <div class="chat-messages flex-1 overflow-y-auto p-4 space-y-4">
+    <div class="grid gap-y-4">
       <app-chat-message
-        text="Hola, soy Sam, ¿Cúal es tu nombre y que puedo ayudarte?"
+        text="Hola, soy tu asistente de presupuestos para eventos. ¿En qué puedo ayudarte hoy?"
+        
       />
 
       @for (message of messages(); track message.text) {
@@ -23,14 +36,14 @@
       @if (isLoading()) {
         <app-typing-loader/>
       }
-
     </div>
   </div>
 
-  <!--    Messages Box-->
-  <app-textMessageBoxFile
-    placeholder="Escribe qui lo que deseas"
-    (onMessage)="handleMessage($event)"
-  />
-
+  <!-- Message Input -->
+  <div class="p-4 bg-slate-800/80 backdrop-blur-sm border-t border-slate-700">
+    <app-textMessageBoxFile
+      placeholder="Describe tu evento o haz una pregunta..."
+      (onMessage)="handleMessage($event)"
+    />
+  </div>
 </div>

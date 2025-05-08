@@ -34,12 +34,26 @@ export class DashboardLayoutComponent {
   // Variable para controlar el estado de carga
   public isGeneratingPdf = false;
 
+  sidebarVisible: boolean = false;
+  currentChatId: string = '';
+
+  // Método para alternar visibilidad del sidebar
+  toggleSidebar(): void {
+    this.sidebarVisible = !this.sidebarVisible;
+  }
+
   cleanLocalStorage() {
     this.messageService.clearMessages();
   }
 
   newChat() {
     this.messageService.newChat();
+  }
+  deleteChat(id: string): void {
+    // Implementa la lógica para eliminar el chat
+    console.log('Eliminar chat:', id);
+    // Si tienes un servicio que maneja los chats:
+    // this.chatService.deleteChat(id);
   }
 
   loadChat(thread: Thread) {
