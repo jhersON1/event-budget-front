@@ -7,7 +7,7 @@ export const postQuestionUseCase = async (
   file?: File
 ): Promise<QuestionResponse[]> => {
   try {
-    const url = `${environment.assistantApi}/user-question`;
+    const url = `${environment.assistantApi}/user-question-event`;
     let resp: Response;
 
     if (file) {
